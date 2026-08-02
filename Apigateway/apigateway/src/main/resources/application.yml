@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+spring:
+  application:
+    name: apigateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+        # Routes to services (You can switch to lb:// when ready)
+        - id: orderservice
+          uri: http://localhost:8020
+          predicates:
+            - Path=/orders/**
+          filters:
+            - AuthenticationFilter
+
+        - id: productservice
+          uri: http://localhost:8040
+          predicates:
+            - Path=/product/**,/sellers/**,/cart/**
+          filters:
+            - AuthenticationFilter
+
+        - id: inventoryservice
+          uri: http://localhost:8010
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - AuthenticationFilter
+        - id: userservice
+          uri: http://localhost:9000
+          predicates:
+            - Path=/users/**
+          filters:
+            - AuthenticationFilter
+
+#        # Swagger routes
+#        - id: swagger-orders
+#          uri: http://localhost:8020
+#          predicates:
+#            - Path=/orders/swagger-ui.html
+#            - Path=/orders/v3/api-docs
+#
+#        - id: swagger-inventory
+#          uri: http://localhost:8010
+#          predicates:
+#            - Path=/inventory/swagger-ui.html
+#            - Path=/inventory/v3/api-docs
+#
+#        - id: swagger-products
+#          uri: http://localhost:8040
+#          predicates:
+#            - Path=/products/swagger-ui.html
+#            - Path=/products/v3/api-docs
