@@ -1,7 +1,7 @@
 #Ecommerce Microservices Project
 --------------------------------
 
-This project is an **eCommerce Application** built using a **Microservices Architecture**.
+This project is an ECommerce Application built using a Microservices Architecture.
 
 
 #Technologies Used
@@ -26,3 +26,22 @@ Each microservice exposes its API documentation through Swagger:
 - Inventory Service: [http://localhost:8010/swagger-ui/index.html#/](http://localhost:8020/swagger-ui/index.html#/)
 - Order Service: [http://localhost:8020/swagger-ui/index.html#/](http://localhost:8010/swagger-ui/index.html#/)
 - User Service: [http://localhost:9000/swagger-ui/index.html#/](http://localhost:9000/swagger-ui/index.html#/)
+
+
+#Microservices 
+--------------
+
+- User Service
+- Inventory Service
+- Order Service
+- Product Service
+- Eureka Discovery Service
+- API Gateway
+
+
+#Application Access
+-------------------
+
+The entire application is accessible through the API Gateway on port '8080'.
+
+Security is implemented using "JWT based Authentication" across all services.
